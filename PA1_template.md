@@ -78,13 +78,6 @@ plot(x=intmean$interval, y=intmean$steps, type="l", ylab="Steps",
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
 
 ```r
-plot(sumstep, type="l", ylab="Average Steps per Day", 
-     xlab="Date", main="Average Steps Taken per Day")
-```
-
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-2.png) 
-
-```r
 ##Calculate 5-min interval with highest steps total
 maxstepint <- max(intmean$steps)
 intmean[intmean$steps == maxstepint,]
@@ -170,13 +163,6 @@ dat3$daytype <- as.factor(dat3$daytype)
 
 ##Grpah Weekday vs Weekend steps
 library(ggplot2)
-```
-
-```
-## Warning: package 'ggplot2' was built under R version 3.1.2
-```
-
-```r
 aggdaytype <- aggregate(steps ~ interval + daytype, dat3, mean)
 
 qplot(interval, steps, data=aggdaytype, geom=c("line"), 

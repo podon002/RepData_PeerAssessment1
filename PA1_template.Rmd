@@ -56,9 +56,6 @@ intmean <- aggregate(steps ~ interval, dat, mean, na.action = na.omit)
 plot(x=intmean$interval, y=intmean$steps, type="l", ylab="Steps", 
      xlab="5-min Interval", main="Steps Taken per 5-min Interval")
 
-plot(sumstep, type="l", ylab="Average Steps per Day", 
-     xlab="Date", main="Average Steps Taken per Day")
-
 ##Calculate 5-min interval with highest steps total
 maxstepint <- max(intmean$steps)
 intmean[intmean$steps == maxstepint,]
