@@ -22,7 +22,8 @@ The variables included in this dataset are:
 The dataset is stored in a comma-separated-value (CSV) file and there are a total of 17,568 observations in this dataset.
 
 ##Loading data and 
-```{r, echo=TRUE}
+
+```r
 ##Load file
 dat <- read.csv("./activity.csv")
 
@@ -32,43 +33,80 @@ dat$steps <- as.numeric(dat$steps)
 ```
 
 ###What is mean total number of steps taken per day?
-```{r, echo=TRUE}
+
+```r
 ##Sum steps for each day
 sumstep <- aggregate(steps ~ date, dat, sum, na.action = na.omit)
 
 ##Plot Histogram
 hist(sumstep$steps)
+```
 
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png) 
+
+```r
 ##Calucate mean and median steps per day
 meanstep <- mean(sumstep$steps)
 medianstep <- median(sumstep$steps)
 print(meanstep)
+```
+
+```
+## [1] 10766.19
+```
+
+```r
 print(medianstep)
+```
+
+```
+## [1] 10765
 ```
 The mean total number of steps taken per day is `meanstep`.
 
 The median total number of steps taken per day is `medianstep`.
 
 ###What is the average daily activity pattern?
-```{r, echo=TRUE}
+
+```r
 ##Make Time-Series plot of 5-min intervals & daily average
 intmean <- aggregate(steps ~ interval, dat, mean, na.action = na.omit)
 plot(x=intmean$interval, y=intmean$steps, type="l", ylab="Steps", 
      xlab="5-min Interval", main="Steps Taken per 5-min Interval")
+```
 
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
+
+```r
 plot(sumstep, type="l", ylab="Average Steps per Day", 
      xlab="Date", main="Average Steps Taken per Day")
+```
 
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-2.png) 
+
+```r
 ##Calculate 5-min interval with highest steps total
 maxstepint <- max(intmean$steps)
 intmean[intmean$steps == maxstepint,]
 ```
 
+```
+##     interval    steps
+## 104      835 206.1698
+```
+
 ###Imputing missing values
-```{r, echo=TRUE}
+
+```r
 ##Calculate the number of NA's in the data
 sum(nrow(dat[dat$steps == "NA",]))
+```
 
+```
+## [1] 2304
+```
+
+```r
 ##Replace NA's with the mean of each interval
 dat2 <- dat
 for(i in 1:nrow(dat2)){
@@ -85,12 +123,27 @@ sumstep2 <- aggregate(steps ~ date, dat2, sum, na.action = na.omit)
 
 ##Plot Histogram of modified data
 hist(sumstep2$steps)
+```
 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+
+```r
 ##Calucate mean and median steps per day
 meanstep2 <- mean(sumstep2$steps)
 medianstep2 <- median(sumstep2$steps)
 print(meanstep2)
+```
+
+```
+## [1] 10766.19
+```
+
+```r
 print(medianstep2)
+```
+
+```
+## [1] 10766.19
 ```
 
 The mean is the same for the imputed data (`meanstep2`).
@@ -100,7 +153,8 @@ However, the median differs slightly, `medianstep` vs `medianstep2`.
 Based on the mean and median, imputing the data appears to have very little effect on the estimates of the total daily number of steps.
 
 ###Are there differences in activity patterns between weekdays and weekends?
-```{r, echo=TRUE}
+
+```r
 ##Add Weekday and Weekend Column
 dat3 <- dat2
 dat3$day <- weekdays(dat3$date)
@@ -122,5 +176,7 @@ qplot(interval, steps, data=aggdaytype, geom=c("line"),
       ylab="Average number of Steps",xlab="Interval", main="") + facet_wrap(
               ~ daytype, ncol=1)
 ```
+
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
 
 Based on the graph, there are slightly more steps taken during the weekend, but overall the differences are not great.
