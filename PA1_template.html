@@ -93,8 +93,8 @@ print(meanstep)</code></pre>
 <pre><code>## [1] 10766.19</code></pre>
 <pre class="r"><code>print(medianstep)</code></pre>
 <pre><code>## [1] 10765</code></pre>
-<p>The mean total number of steps taken per day is <code>meanstep</code>.</p>
-<p>The median total number of steps taken per day is <code>medianstep</code>.</p>
+<p>The mean total number of steps taken per day is 1.076618910^{4}.</p>
+<p>The median total number of steps taken per day is 1.076510^{4}.</p>
 </div>
 <div id="what-is-the-average-daily-activity-pattern" class="section level3">
 <h3>What is the average daily activity pattern?</h3>
@@ -117,7 +117,7 @@ intmean[intmean$steps == maxstepint,]</code></pre>
 <pre class="r"><code>##Calculate the number of NA's in the data
 sum(nrow(dat[dat$steps == &quot;NA&quot;,]))</code></pre>
 <pre><code>## [1] 2304</code></pre>
-<pre class="r"><code>##Replace NA's with the mean of each interval
+<pre class="r"><code>##Replace NA's with the mean of each interval from the previous section
 dat2 &lt;- dat
 for(i in 1:nrow(dat2)){
         if (is.na(dat2$steps[i])) {
@@ -141,8 +141,8 @@ print(meanstep2)</code></pre>
 <pre><code>## [1] 10766.19</code></pre>
 <pre class="r"><code>print(medianstep2)</code></pre>
 <pre><code>## [1] 10766.19</code></pre>
-<p>The mean is the same for the imputed data (<code>meanstep2</code>).</p>
-<p>However, the median differs slightly, <code>medianstep</code> vs <code>medianstep2</code>.</p>
+<p>The mean is the same for the imputed data (1.076618910^{4}).</p>
+<p>However, the median differs slightly, 1.076510^{4} vs 1.076618910^{4}.</p>
 <p>Based on the mean and median, imputing the data appears to have very little effect on the estimates of the total daily number of steps.</p>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level3">

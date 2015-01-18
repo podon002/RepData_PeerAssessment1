@@ -62,9 +62,9 @@ print(medianstep)
 ```
 ## [1] 10765
 ```
-The mean total number of steps taken per day is `meanstep`.
+The mean total number of steps taken per day is 1.0766189 &times; 10<sup>4</sup>.
 
-The median total number of steps taken per day is `medianstep`.
+The median total number of steps taken per day is 1.0765 &times; 10<sup>4</sup>.
 
 ###What is the average daily activity pattern?
 
@@ -107,7 +107,7 @@ sum(nrow(dat[dat$steps == "NA",]))
 ```
 
 ```r
-##Replace NA's with the mean of each interval
+##Replace NA's with the mean of each interval from the previous section
 dat2 <- dat
 for(i in 1:nrow(dat2)){
         if (is.na(dat2$steps[i])) {
@@ -146,9 +146,9 @@ print(medianstep2)
 ## [1] 10766.19
 ```
 
-The mean is the same for the imputed data (`meanstep2`).
+The mean is the same for the imputed data (1.0766189 &times; 10<sup>4</sup>).
 
-However, the median differs slightly, `medianstep` vs `medianstep2`.
+However, the median differs slightly, 1.0765 &times; 10<sup>4</sup> vs 1.0766189 &times; 10<sup>4</sup>.
 
 Based on the mean and median, imputing the data appears to have very little effect on the estimates of the total daily number of steps.
 
@@ -170,6 +170,13 @@ dat3$daytype <- as.factor(dat3$daytype)
 
 ##Grpah Weekday vs Weekend steps
 library(ggplot2)
+```
+
+```
+## Warning: package 'ggplot2' was built under R version 3.1.2
+```
+
+```r
 aggdaytype <- aggregate(steps ~ interval + daytype, dat3, mean)
 
 qplot(interval, steps, data=aggdaytype, geom=c("line"), 

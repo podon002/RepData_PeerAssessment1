@@ -45,9 +45,9 @@ medianstep <- median(sumstep$steps)
 print(meanstep)
 print(medianstep)
 ```
-The mean total number of steps taken per day is `meanstep`.
+The mean total number of steps taken per day is `r meanstep`.
 
-The median total number of steps taken per day is `medianstep`.
+The median total number of steps taken per day is `r medianstep`.
 
 ###What is the average daily activity pattern?
 ```{r, echo=TRUE}
@@ -69,7 +69,7 @@ intmean[intmean$steps == maxstepint,]
 ##Calculate the number of NA's in the data
 sum(nrow(dat[dat$steps == "NA",]))
 
-##Replace NA's with the mean of each interval
+##Replace NA's with the mean of each interval from the previous section
 dat2 <- dat
 for(i in 1:nrow(dat2)){
         if (is.na(dat2$steps[i])) {
@@ -93,9 +93,9 @@ print(meanstep2)
 print(medianstep2)
 ```
 
-The mean is the same for the imputed data (`meanstep2`).
+The mean is the same for the imputed data (`r meanstep2`).
 
-However, the median differs slightly, `medianstep` vs `medianstep2`.
+However, the median differs slightly, `r medianstep` vs `r medianstep2`.
 
 Based on the mean and median, imputing the data appears to have very little effect on the estimates of the total daily number of steps.
 
